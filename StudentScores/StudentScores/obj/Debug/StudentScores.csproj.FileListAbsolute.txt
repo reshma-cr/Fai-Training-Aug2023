@@ -1,0 +1,7 @@
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\obj\Debug\StudentScores.csproj.AssemblyReference.cache
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\obj\Debug\StudentScores.csproj.CoreCompileInputs.cache
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\bin\Debug\StudentScores.exe.config
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\bin\Debug\StudentScores.exe
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\bin\Debug\StudentScores.pdb
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\obj\Debug\StudentScores.exe
+C:\Users\ccrreshma\source\repos\StudentScores\StudentScores\obj\Debug\StudentScores.pdb

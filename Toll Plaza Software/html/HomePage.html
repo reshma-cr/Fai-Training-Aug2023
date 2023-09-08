@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toll Plaza Software</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../javascript/Vehicle.js"></script>
+    
+
+</head>
+<body>
+    <h1>NAVAYUGA INFRASTRUCTURE</h1>
+    <h3><u>Toll Plaza Software</u></h3>
+    <hr>
+    <nav>
+        <ul class="menu">
+            <li><a id="showform" href="#">Vehicle Entry</a></li>
+            <li><a href="#">Toll Statistics</a></li>
+            <li><a href="#">Search</a></li>
+        </ul>
+    </nav>
+    <div id="form-container">
+        <h2>Add New Vehicle Entry</h2>
+        <hr>
+        <section>
+            <p>
+                Enter the Vehicle Registration Number: <input id="txtId" />
+            </p>
+            <p>
+                Select the Vehicle Category: <select id="slCategory">
+                    <option>Select Vehicle</option>
+                    <option>Bike</option>
+                    <option>LMV</option>
+                    <option>HMV</option>
+                    <option>Heavy Truck</option>
+                </select>
+            </p>
+            <p>
+                Enter the Date: <input type="date" id="txtDate" />
+            </p>
+            <p>
+                Enter the Amount: <input type="number" id="txtAmount" />
+            </p>
+            
+            <p>
+                <button>Add Vehicle</button>
+            </p>
+        </section>
+    </div>
+    <script>
+        document.getElementById('showform').addEventListener('click', function () {
+            document.getElementById('form-container').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

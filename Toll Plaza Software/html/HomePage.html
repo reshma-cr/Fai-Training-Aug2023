@@ -1,57 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toll Plaza Software</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../javascript/Vehicle.js"></script>
-    
+<title>Toll Plaza Software</title>
+<link rel="stylesheet" href="../css/style.css"></link>
 
-</head>
 <body>
     <h1>NAVAYUGA INFRASTRUCTURE</h1>
     <h3><u>Toll Plaza Software</u></h3>
     <hr>
-    <nav>
-        <ul class="menu">
-            <li><a id="showform" href="#">Vehicle Entry</a></li>
-            <li><a href="#">Toll Statistics</a></li>
-            <li><a href="#">Search</a></li>
-        </ul>
-    </nav>
-    <div id="form-container">
-        <h2>Add New Vehicle Entry</h2>
-        <hr>
-        <section>
-            <p>
-                Enter the Vehicle Registration Number: <input id="txtId" />
-            </p>
-            <p>
-                Select the Vehicle Category: <select id="slCategory">
-                    <option>Select Vehicle</option>
-                    <option>Bike</option>
-                    <option>LMV</option>
-                    <option>HMV</option>
-                    <option>Heavy Truck</option>
-                </select>
-            </p>
-            <p>
-                Enter the Date: <input type="date" id="txtDate" />
-            </p>
-            <p>
-                Enter the Amount: <input type="number" id="txtAmount" />
-            </p>
-            
-            <p>
-                <button>Add Vehicle</button>
-            </p>
-        </section>
-    </div>
-    <script>
-        document.getElementById('showform').addEventListener('click', function () {
-            document.getElementById('form-container').style.display = 'block';
+<nav>
+    <ul class="menu">
+        <li><a id="showform" href="#">Vehicle Entry</a></li>
+        <li><a id="showstatistics" href="#">Toll Statistics</a></li>
+        <li><a id="showsearch" href="#">Search</a></li>
+    </ul>
+</nav>
+ 
+<div id="vehicle_entryform">
+    <h2>Add New Vehicle Entry</h2>
+        
+    <form id="entryForm">
+<label for="vehicleCategory">Vehicle Category:</label>
+<select id="vehicleCategory" name="vehicleCategory">
+<option value="Bike">Bike</option>
+<option value="LMV">LMV</option>
+<option value="HMV">HMV</option>
+<option value="Heavy Truck">Heavy Truck</option>
+</select><br><br>
+        <label for="vehicleRegNo">Vehicle Registration Number:</label>
+<input type="text" id="vehicleRegNo" name="vehicleRegNo"><br><br>
+        <input type="submit" value="Submit" id="btn">
+</form>
+</div>
+ 
+<div id="vehicle_ststcs">
+    <section>
+    <h2>Toll Statistics</h2>
+<table id="statisticsTable">
+<tr>
+<th>Vehicle Category</th>
+<th>Total Amount Collected</th>
+</tr>
+</table></section>
+</div>
+
+<div id="vehicle_search">
+    <h2>Search</h2>
+<form id="searchForm">
+<label for="searchCategory">Vehicle Category:</label>
+<select id="searchCategory" name="searchCategory">
+<option value="">All</option>
+<option value="Bike">Bike</option>
+<option value="LMV">LMV</option>
+<option value="HMV">HMV</option>
+<option value="Heavy Truck">Heavy Truck</option>
+</select><br><br>
+
+ 
+
+        <label for="searchRegNo">Vehicle Registration Number:</label>
+<input type="text" id="searchRegNo" name="searchRegNo"><br><br>
+
+ 
+
+        <input type="submit" value="Search" id="btn">
+</form>
+
+ 
+
+    <table id="searchResultsTable">
+<tr>
+<th>Vehicle Category</th>
+<th>Vehicle Registration Number</th>
+<th>Toll Amount</th>
+</tr>
+</table>
+</div>
+ 
+
+    <!-- Add jQuery library -->
+<script src="C:\Users\ccrreshma\OneDrive - First American Corporation\Desktop\MyFolder\Web Technologies\lib\jquery.min.js"></script>
+
+ 
+
+    <!-- Add custom script -->
+<script type='text/javascript'>
+
+window.onload=function(){
+    document.getElementById('showform').addEventListener('click', function () {
+            document.getElementById('vehicle_entryform').style.display = 'block';
         });
-    </script>
+
+        document.getElementById('showstatistics').addEventListener('click', function () {
+            document.getElementById('vehicle_ststcs').style.display = 'block';
+        });
+
+        document.getElementById('showsearch').addEventListener('click', function () {
+            document.getElementById('vehicle_search').style.display = 'block';
+        });
+}
+
+
+
+      // Set fixed prices for each vehicle category
+      const prices = {
+          "Bike": 10,
+          "LMV": 20,
+          "HMV": 30,
+          "Heavy Truck": 40
+      };
+
+ 
+
+      // Initialize statistics object
+      let statistics = {
+          "Bike": 0,
+          "LMV": 0,
+          "HMV": 0,
+          "Heavy Truck": 0
+      };
+
+ 
+
+      // Initialize entries array
+      let entries = [];
+
+ 
+
+      // Check if there is data in localStorage
+      if (localStorage.getItem("statistics") !== null) {
+          statistics = JSON.parse(localStorage.getItem("statistics"));
+      }
+
+ 
+
+      if (localStorage.getItem("entries") !== null) {
+          entries = JSON.parse(localStorage.getItem("entries"));
+      }
+
+ 
+
+      // Update statistics table
+      function updateStatisticsTable() {
+          $("#statisticsTable tr").not(":first").remove();
+
+ 
+
+          $.each(statistics, function(key, value) {
+              $("#statisticsTable").append("<tr><td>" + key + "</td><td>" + value + "</td></tr>");
+          });
+      }
+
+ 
+
+      updateStatisticsTable();
+
+ 
+
+      // Handle form submission
+      $("#entryForm").submit(function(event) {
+          event.preventDefault();
+
+ 
+
+          let vehicleCategory = $("#vehicleCategory").val();
+          let vehicleRegNo = $("#vehicleRegNo").val();
+
+ 
+
+          let tollAmount = prices[vehicleCategory];
+          statistics[vehicleCategory] += tollAmount;
+
+ 
+
+          entries.push({
+              vehicleCategory: vehicleCategory,
+              vehicleRegNo: vehicleRegNo,
+              tollAmount: tollAmount
+          });
+
+ 
+
+          localStorage.setItem("statistics", JSON.stringify(statistics));
+          localStorage.setItem("entries", JSON.stringify(entries));
+
+ 
+
+          updateStatisticsTable();
+
+ 
+
+          $("#entryForm")[0].reset();
+      });
+
+ 
+
+      // Handle search form submission
+      $("#searchForm").submit(function(event) {
+          event.preventDefault();
+
+ 
+
+          let searchCategory = $("#searchCategory").val();
+          let searchRegNo = $("#searchRegNo").val();
+
+ 
+
+          let filteredEntries = entries.filter(function(entry) {
+              return (searchCategory === "" || entry.vehicleCategory === searchCategory) && (searchRegNo === "" || entry.vehicleRegNo === searchRegNo);
+          });
+
+ 
+
+          $("#searchResultsTable tr").not(":first").remove();
+
+ 
+
+          $.each(filteredEntries, function(index, entry) {
+              $("#searchResultsTable").append("<tr><td>" + entry.vehicleCategory + "</td><td>" + entry.vehicleRegNo + "</td><td>" + entry.tollAmount + "</td></tr>");
+          });
+      });
+</script>
 </body>
 </html>

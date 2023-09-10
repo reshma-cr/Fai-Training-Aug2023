@@ -16,11 +16,27 @@ div{
     border-radius: 3px;
     vertical-align: top;
     padding: 10px;
-}
-
-#form-container {
     margin-left: 350px;
     margin-top: 50px;
+}
+
+form{
+    /*margin-left: 350px;
+    margin-top: 50px;
+    display: none;*/
+    text-align: center;
+    margin: 0 auto;
+}
+
+#vehicle_entryform {
+    display:none;
+}
+
+#vehicle_ststcs {
+    display: none;
+}
+
+#vehicle_search{
     display: none;
 }
 
@@ -49,7 +65,36 @@ ul.menu {
       display: inline-block; /*since you've changed the display mode from 'block' (implied) to 'inline', any padding, margin, width, or height styles you applied to li elements will not work */
   }
   
-  button {
+  #btn {
     background-color: rgb(1, 88, 129);
     color: rgb(215, 239, 248);
   }
+
+  table {
+    border-collapse: collapse;
+    text-align: center;
+    
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+th {
+    background-color: rgb(1, 88, 129);
+    color: white;
+}
+
+#statisticsTable{
+    text-align: center;
+    margin-left: 100px;
+    margin-bottom: 20px;
+}
+
+#searchResultsTable {
+    margin-left: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
